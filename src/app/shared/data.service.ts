@@ -1,121 +1,41 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
 
 export interface DataItem {
     id: number;
     name: string;
-    description: string;
+    desc: string;
+    price: string;
+    imageSrc: string;
 }
 
 @Injectable({
     providedIn: "root"
 })
 export class DataService {
+    private items: Array<DataItem> = [
+        { id:1, name: "Pancakes!", desc: "Everybody* loves gluten.", price: "$5", imageSrc: "https://placem.at/things?w=500&txt=0&random=9" },
+        { id:2, name: "Bowl of Crap", desc: "Probably something in here. But probably not.", price: "$1", imageSrc: "https://placem.at/things?w=500&txt=0&random=6" },
+        { id:3, name: "Motorcycle", desc: "It'll be worth the argument with your spouse.", price: "$8899", imageSrc: "https://placem.at/things?w=500&txt=0&random=1" },
+        { id:4, name: "Air Plant", desc: "It looked cool in the store.", price: "$9", imageSrc: "https://placem.at/things?w=500&txt=0&random=2" },
+        { id:5, name: "Cuff Links", desc: "You'll need them once in the next ten years.", price: "$59", imageSrc: "https://placem.at/things?w=500&txt=0&random=4" },
+        { id:6, name: "Skateboard", desc: "Too bad you are too old to use it.", price: "$129", imageSrc: "https://placem.at/things?w=500&txt=0&random=7" },
+        { id:7, name: "Off-Brand Soda", desc: "Desperate times we live in.", price: "$2", imageSrc: "https://placem.at/things?w=500&txt=0&random=8" },
+        { id:8, name: "Beer? Liquor?", desc: "Mmmmm drinky.", price: "$7", imageSrc: "https://placem.at/things?w=500&txt=0&random=10" },
+        { id:9, name: "Pie!", desc: "Also good.", price: "$15", imageSrc: "https://placem.at/things?w=500&txt=0&random=11" }
+    ];
+    constructor(private http: HttpClient) {
+        
+    }
 
-    private items = new Array<DataItem>(
-        {
-            id: 1,
-            name: "Item 1",
-            description: "Description for Item 1"
-        },
-        {
-            id: 2,
-            name: "Item 2",
-            description: "Description for Item 2"
-        },
-        {
-            id: 3,
-            name: "Item 3",
-            description: "Description for Item 3"
-        },
-        {
-            id: 4,
-            name: "Item 4",
-            description: "Description for Item 4"
-        },
-        {
-            id: 5,
-            name: "Item 5",
-            description: "Description for Item 5"
-        },
-        {
-            id: 6,
-            name: "Item 6",
-            description: "Description for Item 6"
-        },
-        {
-            id: 7,
-            name: "Item 7",
-            description: "Description for Item 7"
-        },
-        {
-            id: 8,
-            name: "Item 8",
-            description: "Description for Item 8"
-        },
-        {
-            id: 9,
-            name: "Item 9",
-            description: "Description for Item 9"
-        },
-        {
-            id: 10,
-            name: "Item 10",
-            description: "Description for Item 10"
-        },
-        {
-            id: 11,
-            name: "Item 11",
-            description: "Description for Item 11"
-        },
-        {
-            id: 12,
-            name: "Item 12",
-            description: "Description for Item 12"
-        },
-        {
-            id: 13,
-            name: "Item 13",
-            description: "Description for Item 13"
-        },
-        {
-            id: 14,
-            name: "Item 14",
-            description: "Description for Item 14"
-        },
-        {
-            id: 15,
-            name: "Item 15",
-            description: "Description for Item 15"
-        },
-        {
-            id: 16,
-            name: "Item 16",
-            description: "Description for Item 16"
-        },
-        {
-            id: 17,
-            name: "Item 17",
-            description: "Description for Item 17"
-        },
-        {
-            id: 18,
-            name: "Item 18",
-            description: "Description for Item 18"
-        },
-        {
-            id: 19,
-            name: "Item 19",
-            description: "Description for Item 19"
-        },
-        {
-            id: 20,
-            name: "Item 20",
-            description: "Description for Item 20"
-        }
-    );
-
-    getItems(): Array<DataItem> {
-        return this.items;
+    getItems() {
+        return new Promise((resolve, reject) => {
+            /*this.http.get('https://jsonplaceholder.typicode.com/albums/1/photos').toPromise().then((res: DataItem[]) => {
+                this.items = res;
+                resolve(res);
+            });*/
+            resolve(this.items);
+        });        
     }
 
     getItem(id: number): DataItem {
